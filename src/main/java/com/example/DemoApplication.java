@@ -1,6 +1,7 @@
 package com.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +26,9 @@ public class DemoApplication {
 
 	@Bean
 	ObjectMapper mapper(){
-		return new ObjectMapper();
+		ObjectMapper retVal = new ObjectMapper();
+		retVal.enable(SerializationFeature.INDENT_OUTPUT);
+		return retVal;
 	}
 
 }
