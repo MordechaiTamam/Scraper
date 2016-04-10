@@ -23,9 +23,9 @@ public class Scraper {
 	public static final String PRODUCT_NAME = "product-name";
 	public static final String PRODUCT_PRICE = "product-price";
 	public static final String CLASS = "class";
-	@Autowired
-	Executor executor;
+
 	AtomicBoolean isDone = new AtomicBoolean(false);
+
 	@Value("${urls.to.scrap}")
 	private String urltoScrap;
 
@@ -45,9 +45,9 @@ public class Scraper {
 			// get page title
 			String title = doc.title();
 			System.out.println("title : " + title);
-			Elements unorderedlists = doc.getElementsByAttributeValue(CLASS, PRODUCTS_ACTIVE);
+			Elements unordered = doc.getElementsByAttributeValue(CLASS, PRODUCTS_ACTIVE);
 			Collection<Product> products = new LinkedList<Product>();
-			for (Element ul : unorderedlists) {
+			for (Element ul : unordered) {
 				Elements listItems = ul.select("li");
 				int alreadyHandledProductsCount=0;
 				for (Element listItem : listItems) {
@@ -88,11 +88,9 @@ public class Scraper {
 						e.printStackTrace();
 					}
 				}
-				System.out.println("********************************");
+				System.out.println("done...");
 			}
 		};
 		new Thread(command).start();
-//
-//		executor.execute(command);
 	}
 }

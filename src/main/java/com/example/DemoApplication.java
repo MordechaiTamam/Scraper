@@ -28,10 +28,4 @@ public class DemoApplication {
 		return new ObjectMapper();
 	}
 
-	@Bean(destroyMethod = "shutdown")
-	ThreadPoolTaskExecutor executor() {
-		ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-		threadPoolTaskExecutor.setAwaitTerminationSeconds(1);
-		return threadPoolTaskExecutor;
-	}
 }
